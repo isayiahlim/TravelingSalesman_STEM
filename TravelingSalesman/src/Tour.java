@@ -1,10 +1,10 @@
 /**
  * <pre>
- * Name:
+ * Name:  Isayiah Lim
  * Mrs. Kankelborg
- * Period
+ * Period 1
  * Project 1 Traveling Salesman
- * Last Revised on: 
+ * Last Revised on:  12/12/2022
  * </pre>
  */
 public class Tour
