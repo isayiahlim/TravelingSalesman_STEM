@@ -13,7 +13,7 @@ public class TourDriver
         Tour test = new Tour();
         try
         {
-            String filename = "./input/tsp1000.txt"; // Try out different sample input files!
+            String filename = "./input/bier127.txt"; // Try out different sample input files!
             BufferedReader bf = new BufferedReader(new FileReader(new File(filename)));
             String scale = bf.readLine();
             String[] points = scale.split(" ");
@@ -23,6 +23,12 @@ public class TourDriver
             while (nextLine != null && !nextLine.equals(""))
             {
                 // Add your code here to parse each line of the input.
+                String[] coords = nextLine.split(" ");
+                if(!(coords[0].equals("") || coords[1].equals("")))
+                {
+                	Point p = new Point(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
+                    test.insertNearest(p);   
+                }
                 nextLine = bf.readLine();
             }
             bf.close();

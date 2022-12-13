@@ -91,8 +91,15 @@ public class Tour
      */
     public void draw()
     {
-    	StdDraw.setPenColor(StdDraw.BLACK);
     	Node temp = home;
+    	if(size == 0)
+    		return;
+    	if(size == 1)
+    	{
+    		temp.data.draw();
+    		return;
+    	}
+    	
     	for(int i = 0; i < size+1; i ++)
     	{
     		temp.data.draw();
@@ -108,6 +115,12 @@ public class Tour
     	int iterIndex = 0;
     	int storedIndex = 0;
     	Node temp = home;
+    	if(size == 0)
+    	{
+    		home = new Node(p);
+    		size++;
+    		return;
+    	}
     	double min = p.distanceTo(temp.data);
     	temp = temp.next;
     	for(int i = 1; i < size; i ++)
@@ -122,13 +135,14 @@ public class Tour
     		iterIndex ++;
     	}
     	Node temp2 = home;
-    	for(int i = 0; i < storedIndex+1; i++)
+    	for(int i = 0; i < storedIndex; i++)
     	{
     		temp2 = temp2.next;
     	}
     	Node insert = new Node(p);
-    	insert.next = temp2.next;
+    	insert.next = temp2;
     	temp2.next = insert;
+    	size ++;
     }
 
     /**
@@ -142,11 +156,13 @@ public class Tour
     	if(size == 0)
     	{	
     		home = new Node(p);
+    		size ++;
     		return;
     	}
     	if(size == 1)
     	{
     		home.next = new Node(p);
+    		size ++;
     		return;
     	}
     	double difference = temp.data.distanceTo(temp.next.data);
@@ -170,9 +186,9 @@ public class Tour
     	{
     		temp2 = temp2.next;
     	}
-    	Node insert = new Node();
-    	insert.data = p;
+    	Node insert = new Node(p);
     	insert.next = temp2.next;
     	temp2.next = insert;
+    	size ++;
     }
 }
