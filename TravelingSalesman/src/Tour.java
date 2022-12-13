@@ -142,6 +142,8 @@ public class Tour
     	Node insert = new Node(p);
     	insert.next = temp2;
     	temp2.next = insert;
+    	if(size == 1)
+    		insert.next = home;
     	size ++;
     }
 
@@ -162,6 +164,7 @@ public class Tour
     	if(size == 1)
     	{
     		home.next = new Node(p);
+    		home.next.next = home;
     		size ++;
     		return;
     	}
