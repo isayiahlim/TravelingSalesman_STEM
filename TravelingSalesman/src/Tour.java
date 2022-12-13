@@ -60,7 +60,7 @@ public class Tour
         Node temp = home;
         if(size <= 1) 
         	return 0;
-        //runs through the entire list & back to the first
+        //runs through the entire list & back to the first, adding the distance between points
         for(int i = 0; i < size; i++)
         {
         	returnLen += temp.data.distanceTo(temp.next.data);
@@ -77,10 +77,11 @@ public class Tour
         if(size == 0) 
         	return "";
         Node temp = home.next;
-    	StringBuilder returnStr = new StringBuilder("(" + home.toString() + ")\n");
+        //adds each string to the list
+    	StringBuilder returnStr = new StringBuilder(home.data + "\n");
     	for(int i = 1; i < size; i ++)
     	{
-    		returnStr.append("(" + temp.toString() + ")\n");
+    		returnStr.append(temp.data + "\n");
     		temp = temp.next;
     	}
     	return returnStr.toString();
