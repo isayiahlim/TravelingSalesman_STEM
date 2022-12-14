@@ -158,7 +158,6 @@ public class Tour
      */
     public void insertSmallest(Point p)
     {
-    	int iterIndex = 0;
     	int storedIndex = 0;
     	Node temp = home;
     	if(size == 0)
@@ -174,22 +173,21 @@ public class Tour
     		size ++;
     		return;
     	}
-    	double difference = temp.data.distanceTo(temp.next.data);
+    	double original = temp.data.distanceTo(temp.next.data);
     	double newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
-    	double smallestChange = newDistance - difference;
+    	double smallestChange = newDistance - original;
     	temp = temp.next;
-    	for(int i = 1; i < size-1; i ++)
+    	for(int i = 1; i < size; i ++)
     	{
-    		difference = temp.data.distanceTo(temp.next.data);
+    		original = temp.data.distanceTo(temp.next.data);
     		newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
-    		if(newDistance - difference < smallestChange)
+    		if(newDistance - original < smallestChange)
     		{
-    			storedIndex = iterIndex;
-    			smallestChange = newDistance - difference;
+    			storedIndex = i;
+    			smallestChange = newDistance - original;
     		}
     		temp = temp.next;
-    		iterIndex ++;
-    	}
+       	}
     	
     	Node temp2 = home;
     	for(int i = 0; i < storedIndex; i++)
