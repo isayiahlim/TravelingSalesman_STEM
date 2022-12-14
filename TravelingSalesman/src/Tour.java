@@ -78,7 +78,7 @@ public class Tour
     	if(size == 0) 
         	return null;
         Node temp = home.next;
-        //adds each string to the list
+        //call each node's toString, then adds each string to the list
     	StringBuilder returnStr = new StringBuilder(home.data + "\n");
     	for(int i = 1; i < size; i ++)
     	{
@@ -94,6 +94,7 @@ public class Tour
     public void draw()
     {
     	Node temp = home;
+    	//null conditionals
     	if(size == 0)
     		return;
     	if(size == 1)
@@ -101,7 +102,7 @@ public class Tour
     		temp.data.draw();
     		return;
     	}
-    	
+    	//draws every point and a line connecting to the next point
     	for(int i = 0; i < size+1; i ++)
     	{
     		temp.data.draw();
@@ -115,8 +116,10 @@ public class Tour
      */
     public void insertNearest(Point p)
     {
+    	//stores the index to iterate to on the second run through
     	int storedIndex = 0;
     	Node temp = home;
+    	//null conditionals, sets either the first or the second nodes
     	if(size == 0)
     	{
     		home = new Node(p);
@@ -130,11 +133,13 @@ public class Tour
     		size++;
     		return;
     	}
+    	//the smallest distance
     	double min = p.distanceTo(temp.data);
     	temp = temp.next;
     	for(int i = 1; i < size; i ++)
     	{
     		double tempDistance = p.distanceTo(temp.data);
+    		//if there is a smaller distance, it replaces the node and stores its index
     		if(tempDistance < min)
     		{
     			storedIndex = i;
@@ -142,6 +147,7 @@ public class Tour
     		}
     		temp = temp.next;
     	}
+    	//iterates to the location of the stored node then inserts and pushes everything over
     	Node temp2 = home;
     	for(int i = 0; i < storedIndex; i++)
     	{
@@ -158,8 +164,10 @@ public class Tour
      */
     public void insertSmallest(Point p)
     {
+    	//stores index of the smallest overall change
     	int storedIndex = 0;
     	Node temp = home;
+    	//null conditional, adds either 1st or 2nd node
     	if(size == 0)
     	{	
     		home = new Node(p);
@@ -173,6 +181,7 @@ public class Tour
     		size ++;
     		return;
     	}
+    	//calculates the smallest change caused by an insertion
     	double original = temp.data.distanceTo(temp.next.data);
     	double newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
     	double smallestChange = newDistance - original;
@@ -181,6 +190,7 @@ public class Tour
     	{
     		original = temp.data.distanceTo(temp.next.data);
     		newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
+    		//stores the index of it to iterate to
     		if(newDistance - original < smallestChange)
     		{
     			storedIndex = i;
@@ -188,7 +198,7 @@ public class Tour
     		}
     		temp = temp.next;
        	}
-    	
+    	//iterates to the location of the stored node then inserts and pushes everything over
     	Node temp2 = home;
     	for(int i = 0; i < storedIndex; i++)
     	{
