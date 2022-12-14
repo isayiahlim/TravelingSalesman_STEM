@@ -74,7 +74,8 @@ public class Tour
      */
     public String toString()
     {
-        if(size == 0) 
+        //null pointer
+    	if(size == 0) 
         	return "";
         Node temp = home.next;
         //adds each string to the list
@@ -105,6 +106,7 @@ public class Tour
     	{
     		temp.data.draw();
     		temp.data.drawTo(temp.next.data);
+    		temp = temp.next;
     	}
     }
 
@@ -119,6 +121,13 @@ public class Tour
     	if(size == 0)
     	{
     		home = new Node(p);
+    		size++;
+    		return;
+    	}
+    	if(size == 1)
+    	{
+    		home.next = new Node(p);
+    		home.next.next = home;
     		size++;
     		return;
     	}
@@ -141,10 +150,8 @@ public class Tour
     		temp2 = temp2.next;
     	}
     	Node insert = new Node(p);
-    	insert.next = temp2;
+    	insert.next = temp2.next;
     	temp2.next = insert;
-    	if(size == 1)
-    		insert.next = home;
     	size ++;
     }
 
@@ -182,11 +189,12 @@ public class Tour
     			storedIndex = iterIndex;
     			smallestChange = newDistance - difference;
     		}
+    		temp = temp.next;
     		iterIndex ++;
     	}
     	
     	Node temp2 = home;
-    	for(int i = 0; i < storedIndex+1; i++)
+    	for(int i = 0; i < storedIndex; i++)
     	{
     		temp2 = temp2.next;
     	}
