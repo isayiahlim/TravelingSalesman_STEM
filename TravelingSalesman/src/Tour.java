@@ -76,7 +76,7 @@ public class Tour
     {
         //null pointer
     	if(size == 0) 
-        	return "";
+        	return null;
         Node temp = home.next;
         //adds each string to the list
     	StringBuilder returnStr = new StringBuilder(home.data + "\n");
@@ -115,7 +115,6 @@ public class Tour
      */
     public void insertNearest(Point p)
     {
-    	int iterIndex = 0;
     	int storedIndex = 0;
     	Node temp = home;
     	if(size == 0)
@@ -138,11 +137,10 @@ public class Tour
     		double tempDistance = p.distanceTo(temp.data);
     		if(tempDistance < min)
     		{
-    			storedIndex = iterIndex;
+    			storedIndex = i;
     			min = tempDistance;
     		}
     		temp = temp.next;
-    		iterIndex ++;
     	}
     	Node temp2 = home;
     	for(int i = 0; i < storedIndex; i++)
