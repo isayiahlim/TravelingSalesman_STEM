@@ -85,10 +85,10 @@ public class Tour
         	return null;
         Node temp = home.next;
         //call each node's toString, then adds each string to the list
-    	StringBuilder returnStr = new StringBuilder(home.data.toString());
+    	StringBuilder returnStr = new StringBuilder(home.data + "\n");
     	for(int i = 1; i < size; i ++)
     	{
-    		returnStr.append("\n" + temp.data);
+    		returnStr.append(temp.data + "\n");
     		temp = temp.next;
     	}
     	return returnStr.toString();
