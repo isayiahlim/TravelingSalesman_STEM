@@ -108,6 +108,10 @@ public class Tour
     		temp.data.draw();
     		return;
     	}
+    	if(size > 10000)
+    	{
+    		StdDraw.enableDoubleBuffering();
+    	}
     	//draws every point and a line connecting to the next point
     	for(int i = 0; i < size+1; i ++)
     	{
@@ -115,6 +119,7 @@ public class Tour
     		temp.data.drawTo(temp.next.data);
     		temp = temp.next;
     	}
+    	StdDraw.show();
     }
 
     /**
