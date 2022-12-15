@@ -122,7 +122,10 @@ public class Tour
      */
     public void insertNearest(Point p)
     {
-       	//null conditionals, sets either the first or the second nodes
+    	//stores the index to iterate to on the second run through
+    	int storedIndex = 0;
+    	Node temp = home;
+    	//null conditionals, sets either the first or the second nodes
     	if(size == 0)
     	{
     		home = new Node(p);
@@ -136,17 +139,14 @@ public class Tour
     		size++;
     		return;
     	}
-    	//stores the index to iterate to on the second run through
-    	int storedIndex = 0;
-    	Node temp = home.next;
     	//the smallest distance
-    	double min = p.distanceTo(home.data);
-    	//iterates through the next points in the list to check against
+    	double min = p.distanceTo(temp.data);
+    	temp = temp.next;
     	for(int i = 1; i < size; i ++)
     	{
     		double tempDistance = p.distanceTo(temp.data);
     		//if there is a smaller distance, it replaces the node and stores its index
-    		if(tempDistance <= min)
+    		if(tempDistance < min)
     		{
     			storedIndex = i;
     			min = tempDistance;
@@ -197,7 +197,7 @@ public class Tour
     		original = temp.data.distanceTo(temp.next.data);
     		newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
     		//stores the index of it to iterate to
-    		if(newDistance - original <= smallestChange)
+    		if(newDistance - original < smallestChange)
     		{
     			storedIndex = i;
     			smallestChange = newDistance - original;
