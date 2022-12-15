@@ -42,7 +42,13 @@ public class Tour
     	home = null;
     	size = 0;
     }
-
+    
+    //purely for testing purposes
+    public Tour(Point p)
+    {
+    	home = new Node(p);
+    	size = 1;
+    }
     /**
      * Returns the number of points in this tour.
      */
@@ -79,10 +85,10 @@ public class Tour
         	return null;
         Node temp = home.next;
         //call each node's toString, then adds each string to the list
-    	StringBuilder returnStr = new StringBuilder(home.data + "\n");
+    	StringBuilder returnStr = new StringBuilder(home.data.toString());
     	for(int i = 1; i < size; i ++)
     	{
-    		returnStr.append(temp.data + "\n");
+    		returnStr.append("\n" + temp.data);
     		temp = temp.next;
     	}
     	return returnStr.toString();
@@ -116,10 +122,7 @@ public class Tour
      */
     public void insertNearest(Point p)
     {
-    	//stores the index to iterate to on the second run through
-    	int storedIndex = 0;
-    	Node temp = home;
-    	//null conditionals, sets either the first or the second nodes
+       	//null conditionals, sets either the first or the second nodes
     	if(size == 0)
     	{
     		home = new Node(p);
@@ -133,14 +136,17 @@ public class Tour
     		size++;
     		return;
     	}
+    	//stores the index to iterate to on the second run through
+    	int storedIndex = 0;
+    	Node temp = home.next;
     	//the smallest distance
-    	double min = p.distanceTo(temp.data);
-    	temp = temp.next;
+    	double min = p.distanceTo(home.data);
+    	//iterates through the next points in the list to check against
     	for(int i = 1; i < size; i ++)
     	{
     		double tempDistance = p.distanceTo(temp.data);
     		//if there is a smaller distance, it replaces the node and stores its index
-    		if(tempDistance < min)
+    		if(tempDistance <= min)
     		{
     			storedIndex = i;
     			min = tempDistance;
@@ -191,7 +197,7 @@ public class Tour
     		original = temp.data.distanceTo(temp.next.data);
     		newDistance = temp.data.distanceTo(p) + p.distanceTo(temp.next.data);
     		//stores the index of it to iterate to
-    		if(newDistance - original < smallestChange)
+    		if(newDistance - original <= smallestChange)
     		{
     			storedIndex = i;
     			smallestChange = newDistance - original;
