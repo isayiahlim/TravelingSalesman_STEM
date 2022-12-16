@@ -16,11 +16,6 @@ public class Tour
     {
         private Point data;
         private Node next;
-        public Node()
-        {
-        	data = null;
-        	next = null;
-        }
         public Node(Point p)
         {
         	data = p;
